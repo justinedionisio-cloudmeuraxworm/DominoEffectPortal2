@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layered Defense &mdash; A Phishing Response Simulation</title>
+    <meta
+      name="description"
+      content="An interactive, browser-only simulation showing what a VPN, Firewall, and Multi-Factor Authentication each actually stop during a phishing attack — and what they don't."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Decorative fixed background grid. Hidden from screen readers
+         because it carries no information of its own. -->
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <!-- ============================================================
+         TOP BAR
+         Shown on every page. The step list doubles as an honest
+         progress indicator: it tells the participant exactly where
+         they are in a real 5-step sequence, not just decoration.
+         ============================================================ -->
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="brand-mark" aria-hidden="true">&#x2B21;</span>
+        <span class="brand-name"
+          >Layered<span class="brand-name-accent">Defense</span></span
+        >
+      </div>
+      <nav class="topbar__progress" aria-label="Simulation progress">
+        <span class="step step--current">
+          <span class="step__index">01</span>
+          <span class="step__label">Overview</span>
+        </span>
+        <span class="step">
+          <span class="step__index">02</span>
+          <span class="step__label">Inbox</span>
+        </span>
+        <span class="step">
+          <span class="step__index">03</span>
+          <span class="step__label">Login</span>
+        </span>
+        <span class="step">
+          <span class="step__index">04</span>
+          <span class="step__label">Defenses</span>
+        </span>
+        <span class="step">
+          <span class="step__index">05</span>
+          <span class="step__label">Results</span>
+        </span>
+      </nav>
+    </header>
+
+    <!-- ============================================================
+         HERO
+         Two columns: the pitch + call to action on the left, and a
+         small "session monitor" panel on the right that previews the
+         laptop → internet → server path used later on the dashboard.
+         ============================================================ -->
+    <main class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Interactive Research Simulation</p>
+        <h1 class="hero__title">
+          See how one careless click
+          <span class="hero__title-accent">outruns</span> a VPN.
+        </h1>
+        <p class="hero__lede">
+          This lab walks you through a realistic phishing attempt, then lets
+          you switch on VPN, Firewall, and Multi-Factor Authentication to see
+          &mdash; control by control &mdash; what each one actually stops,
+          and what it doesn't.
+        </p>
+        <div class="hero__actions">
+          <button type="button" id="start-btn" class="btn btn--primary">
+            Start Simulation
+          </button>
+          <p class="hero__disclaimer">
+            No real credentials are collected. Nothing leaves your browser.
+          </p>
+        </div>
+      </div>
+
+      <div class="hero__console glass" aria-hidden="true">
+        <div class="console__scanline"></div>
+        <p class="console__label">Session Monitor</p>
+
+        <!-- Network path diagram: Laptop → Internet (with a threat
+             indicator) → Office Server, with an animated packet
+             traveling along the path. Purely illustrative here; this
+             same path becomes interactive on the dashboard page. -->
+        <svg
+          class="console__diagram"
+          viewBox="0 0 300 60"
+          role="img"
+          aria-label="Diagram of a laptop connecting through the internet to an office server"
+        >
+          <!-- Laptop -->
+          <g transform="translate(6,16)">
+            <rect
+              x="0"
+              y="0"
+              width="30"
+              height="20"
+              rx="3"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <rect x="-4" y="20" width="38" height="4" rx="2" fill="currentColor" />
+          </g>
+
+          <!-- Connection line -->
+          <line
+            x1="44"
+            y1="26"
+            x2="248"
+            y2="26"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-dasharray="4 5"
+            opacity="0.35"
+          />
+
+          <!-- Internet cloud, containing a small threat indicator -->
+          <g transform="translate(118,2)">
+            <path
+              d="M8 26 a9 9 0 0 1 0-18 a12 12 0 0 1 23-3 a10 10 0 0 1 9 18 z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <circle cx="24" cy="12" r="2.6" fill="var(--color-red)" />
+          </g>
+
+          <!-- Office server -->
+          <g transform="translate(238,6)">
+            <rect
+              x="0"
+              y="0"
+              width="24"
+              height="32"
+              rx="3"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <circle cx="6" cy="8" r="1.5" fill="currentColor" />
+            <circle cx="6" cy="16" r="1.5" fill="currentColor" />
+            <circle cx="6" cy="24" r="1.5" fill="currentColor" />
+          </g>
+
+          <!-- Animated packet traveling from laptop toward the server -->
+          <circle
+            class="diagram__packet"
+            cx="44"
+            cy="26"
+            r="3.5"
+            fill="var(--color-cyan)"
+          />
+        </svg>
+
+        <ul class="console__status">
+          <li class="chip chip--standby">
+            <span class="chip__dot"></span>VPN &mdash; STANDBY
+          </li>
+          <li class="chip chip--standby">
+            <span class="chip__dot"></span>FIREWALL &mdash; STANDBY
+          </li>
+          <li class="chip chip--standby">
+            <span class="chip__dot"></span>MFA &mdash; STANDBY
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Educational simulation built for a quantitative research study on
+        layered network security. Runs entirely in your browser &mdash; HTML,
+        CSS &amp; JavaScript only, no server, no data collection.
+      </p>
+    </footer>
+
+    <!-- state.js must load before main.js: main.js calls resetState(),
+         which is defined in state.js. -->
+    <script src="js/state.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
