@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results &mdash; Layered Defense Simulation</title>
+    <meta
+      name="description"
+      content="A plain-language explanation of what happened in the simulation, plus the phishing warning signs revealed."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="brand-mark" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" focusable="false"><polygon points="8,1 14.1,4.5 14.1,11.5 8,15 1.9,11.5 1.9,4.5" fill="none" stroke="currentColor" stroke-width="1.5" /></svg></span>
+        <span class="brand-name"
+          >Layered<span class="brand-name-accent">Defense</span></span
+        >
+      </div>
+      <nav class="topbar__progress" aria-label="Simulation progress">
+        <span class="step step--done">
+          <span class="step__index">01</span>
+          <span class="step__label">Overview</span>
+        </span>
+        <span class="step step--done">
+          <span class="step__index">02</span>
+          <span class="step__label">Inbox</span>
+        </span>
+        <span class="step step--done">
+          <span class="step__index">03</span>
+          <span class="step__label">Login</span>
+        </span>
+        <span class="step step--done">
+          <span class="step__index">04</span>
+          <span class="step__label">Defenses</span>
+        </span>
+        <span class="step step--current">
+          <span class="step__index">05</span>
+          <span class="step__label">Results</span>
+        </span>
+      </nav>
+    </header>
+
+    <main class="page-main">
+      <section class="page-intro">
+        <p class="eyebrow">Step 05 &mdash; Results</p>
+        <h1 class="page-title">Here's what actually happened.</h1>
+        <p class="page-lede">
+          No score, no points &mdash; just a plain explanation of what
+          occurred, why, and which controls actually mattered. At the end,
+          we'll show you exactly what gave the phishing message away.
+        </p>
+      </section>
+
+      <div id="early-arrival-notice" class="notice" hidden>
+        <p>
+          It looks like you reached this page without going through the
+          simulated email and login pages, so the recap below may be empty.
+          <a href="index.html">Start from the landing page &rarr;</a>
+        </p>
+      </div>
+
+      <section class="results-section">
+        <div class="results-card glass">
+          <h2>What You Did</h2>
+          <ul id="recap-list" class="recap-list">
+            <!-- Filled in by results.js -->
+          </ul>
+        </div>
+      </section>
+
+      <section class="results-section">
+        <div class="results-card glass">
+          <h2>Your Final Defense Configuration</h2>
+          <div id="config-chips" class="config-chips">
+            <!-- Filled in by results.js -->
+          </div>
+        </div>
+      </section>
+
+      <section class="results-section">
+        <div class="results-card glass">
+          <h2>What Happened</h2>
+          <div id="outcome-panel">
+            <!-- Filled in by results.js -->
+          </div>
+        </div>
+      </section>
+
+      <section class="results-section">
+        <div class="results-card glass">
+          <h2>Spot the Signs</h2>
+          <p class="results-card__note">
+            Now that the simulation is over, here's what actually gave that
+            message away.
+          </p>
+          <ul id="indicator-list" class="indicator-list">
+            <!-- Filled in by results.js -->
+          </ul>
+        </div>
+      </section>
+
+      <p class="takeaway">
+        No single control in this simulation could have stopped the phishing
+        message from being convincing &mdash; that's a human judgment call,
+        not a network setting. VPN and Firewall protect different things
+        (traffic privacy and suspicious outbound activity) that matter for
+        other kinds of threats, even though neither stopped this specific
+        credential theft. MFA is what actually limited the damage once the
+        credentials were already gone. Layered security means every layer
+        still matters &mdash; just not always for the reason you'd expect.
+      </p>
+
+      <!-- ============================================================
+           RESEARCH SURVEY LINK
+           If you're using this simulation as part of a study, this is
+           where participants continue on to your post-test / feedback
+           form once they've read their results.
+
+           TO ADD YOUR GOOGLE FORM:
+           Replace the href value below (currently a placeholder) with
+           your real Google Form link. That's the only change needed —
+           everything else (new tab, styling) already works.
+           ============================================================ -->
+      <section class="results-section">
+        <div class="results-card glass survey-card">
+          <h2>This is only a tutorial. Now, let's get into the journey, shall we?</h2>
+          <p class="results-card__note">
+            You've analyzed the layered defense data. Now, put those skills to the test in our custom built-cybersecurity game.
+          </p>
+          <a
+            href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn--primary"
+          >
+            Let's goo!
+          </a>
+        </div>
+      </section>
+
+      <div class="results-restart">
+        <button type="button" id="restart-btn" class="btn btn--secondary">
+          Restart Simulation
+        </button>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Educational simulation built for a quantitative research study on
+        layered network security. Runs entirely in your browser &mdash; HTML,
+        CSS &amp; JavaScript only, no server, no data collection.
+      </p>
+    </footer>
+
+    <!-- Load order matters: state.js (getState/resetState/escapeHtml),
+         then scoring.js (CONTROLS/getOutcome), then results.js. -->
+    <script src="js/state.js"></script>
+    <script src="js/scoring.js"></script>
+    <script src="js/results.js"></script>
+  </body>
+</html>
