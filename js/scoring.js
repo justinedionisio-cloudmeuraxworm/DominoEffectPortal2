@@ -73,7 +73,7 @@ const CONTROLS = [
 const OUTCOMES = {
   "000": {
     accountTakeover: true,
-    headline: "Full compromise — nothing here was in place to stop it. (RIP)",
+    headline: "Full compromise — nothing here was in place to stop it. (LOL)",
     details: [
       "Your connection to the fake sign-in page was not encrypted by a VPN.",
       "No firewall was active to restrict any follow-up suspicious activity.",
